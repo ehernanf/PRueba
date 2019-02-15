@@ -1,0 +1,112 @@
+<div id="container"><!--content del menu -->
+    <div class="container-fluid etitle"> <!-- contenido fluid del boostrat-->
+        <div class="panel panel-ecustom ui-shadow">
+            <div class="panel-heading etitleprin"><div class="btn-news"><b> <?php echo $this->titulo; ?> </b></div></div>
+            
+            <form class="form-signin" role="form" action="<?php echo BASE_URL; ?>index.php/listar/reporte_02" method="GET" id="frmdirector_id" name="frmdirector">
+            <div class="row eborderper ">
+                <div class="col-xs-10 col-md-12  table-responsive text-center ">
+                     <div class="form-group  espacerightleft">
+                                         <!--<span class="espacetitlebottom etitletit"><b>Sede</b></span>-->
+                        <span class="espacetitlebottom etitletit"><b>Sede</b>
+
+                                          
+                            <select class="form-control" id="psede" required name="psede" >
+                                <option value="">Seleccione</option>
+                                  <?php foreach ($this->sedes as $sede): ?>
+                                
+                                <option value="<?php echo $sede->COD_SEDE; ?>"
+                                    <?php if(isset($_GET['psede'])): 
+                                            if($_GET['psede'] == $sede->COD_SEDE) : 
+                                                echo 'selected' ; 
+                                            endif; 
+                                          endif;?> >  <?php echo $sede->SEDE;  ?></option>                                
+                                <?php endforeach; ?>                                
+                            </select>   </span>
+ </div>
+                </div>
+            </div>
+            <?php if(isset($this->reporte) && count($this->reporte) > 0){?> 
+            <div class="row eborderper ">
+                <div class="col-xs-10 col-md-12  table-responsive text-center ">
+                    <table  class="table table-bordered etableeli text-center table-striped" id="t_locales" >
+                        <thead>
+                            <tr class="info">
+                                <td>COD. PAQUETE</td>
+                                <td>CAJA</td>
+                                <td>PESO DE CAJA</td>
+                                <td>COD. MANUAL</td>
+                                <td>MANUAL</td>                                
+                                <td>&nbsp;</td>
+                            </tr>
+                        </thead>
+                        <tbody>                            
+                            <?php  $x = 0;?>
+                            <?php foreach ($this->reporte as $reporte): ?>
+                                <tr>
+                                    <td class="text-left"><small>
+                                        <?php echo $reporte->COD_PAQUETE; ?></small></td>
+                                        
+                                    <td><label> <small><?php echo $reporte->CAJA; ?></small></label></td>
+                                    <td><?php if($reporte->PESO){ echo $reporte->PESO.' Kg';} ?></td>
+                                    <td><label> <small><?php echo $reporte->COD_MANUAL; ?></small></label></td>
+                                    <td><label> <small><?php echo $reporte->MANUAL; ?></small></label></td>
+                                    
+                                    <td>
+                                        <?php if($reporte->ESTADO <= 0 ){ ?> 
+                                        <label><small><button type="button" class="btn"> NO INVENTARIADO</button></small></label>
+                                        <?php }elseif($reporte->ESTADO == 1){
+                                        ?>
+                                            <label><small><button type="button" class="btn btn-primary"> INVENTARIADO</button></small></label>
+                                            <?php
+                                        }elseif($reporte->ESTADO > 1){
+                                            ?>
+                                            <label><small><button type="button" class="btn btn-success"> ENVIADO AL SERVIDOR</button></small></label>
+                                        <?php }?> 
+                                    </td>                                    
+                                </tr>
+                            <?php  $x = $x + 1;?>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <?php }?> 
+            
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title"><label id="tipoo2"></label> - Cajas que Faltan Escanear </h4> 
+                    </div>
+                    <div class="modal-body">
+                      <table class="table table-bordered etableeli text-center table-striped" id="nopistola"> 
+                         <thead>
+                              <th class="info">
+                                   <td class="info">Codigo barra</td>                                   
+                                   <td class="info">Tipo caja</td>                      
+                                   <td class="info">Estado</td>                      
+                              </th>            
+                          </thead>
+                          <tbody>
+
+                          </tbody>
+
+                      </table>
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>            
+                <!--<input type="hidden" name="ruta" id="ruta" value="<?php //=BASE_URL; ?>"/>-->
+            </form>
+        </div>
+    </div>
+</div>

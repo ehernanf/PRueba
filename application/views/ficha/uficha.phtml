@@ -1,0 +1,282 @@
+
+<div class="container">
+    <div class="panel panel-ecustom ui-shadow">
+        <div class="panel-heading etitleprin"><?php echo 'SEDE: ' . ($this->_request->session('sede')) . ' / LOCAL: ' . $this->_request->session('nlocal'); ?></div>
+        <div class="panel-body etitle">
+
+            <form class="form-signin" role="form" action="<?php echo BASE_URL; ?>index.php/ficha" method="GET" id="formcartilla" name="formcartilla">
+                <div class="row"> 
+                    <div class="form-group  espacerightleft">
+
+                        <div class="espacetitlebottom etitletit"><b>Aula</b></div>
+                        <select class="form-control" id="paulas_id" required name="paulas">
+                            <option value="">Seleccione</option>
+                            <?php foreach ($this->aulas as $aula): ?>
+                                <option value="<?php echo $aula->naula; ?>"
+                                <?php
+                                if (isset($_REQUEST['paulas'])):
+                                    if ($_REQUEST['paulas'] == $aula->naula) :
+                                        echo 'selected';
+                                    endif;
+                                endif;
+                                ?> >  <?php echo $aula->nombre;
+                                    if ($aula->tipo == 0):echo ' (Contingencia)';
+                                    endif; ?></option>
+<?php endforeach; ?>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 espace-top espace-bottom buscador">
+
+                        <div class="input-group">
+                            <input id="ins_numdoc" required class="form-control text-left input-buscador" type="number" placeholder="Pasar Lector de Código de Barra" data-length="" value="" name="ins_numdoc">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary  input-buscador " type="submit">Buscar</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row espacerightleft " >
+
+<?php if ($this->estado == '1'): ?>
+                        <div class="row  alert-success2 alert" >
+                            <div class="col-xs-12 text-center espace-bottom"><b> SE GRAB&Oacute; LA FICHA CORRECTAMENTE</b> </div><!--(Parte <?php //echo ($this->director->cant_ficha + 1) ; ?>)-->.
+                            <div class="row">
+                                <div class="col-xs-12"> 
+                                    <div class="form-group  espacerightleft espace-top">
+                                        <div class="espacetitlebottom" style="font-size: 24px">
+                                        <?php if ($this->director->ins_numdoc):  ?>
+                                        <label class="etitletit"> <b>DNI : </b>  </label><label id="dni_id"><?php echo ($this->director) ? $this->director->ins_numdoc : ''; ?></label>
+                                        <?php else: ?>
+                                        <label class="etitletit"> <b>N° FICHA : </b>  </label><label id="dni_id"><?php echo  $this->director->codFicha; ?></label>
+                                        <?php endif; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12"> 
+                                    <div class="form-group  espacerightleft espace-top">                       
+
+                                        <label id="dni_id" style="font-size: 32px"><?php echo ($this->director) ? $this->director->apepat . ' ' . $this->director->apemat . ' ' . $this->director->nombres : ''; ?></label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+<?php endif; ?>
+
+
+<?php if ($this->estado == '8'): //8 ?>
+                        <div class="row alert-danger2 alert">
+
+                            <div class="row">
+                                <div class="col-xs-12"> 
+                                    <div class="form-group  espacerightleft espace-top">                       
+                                        <div class="espacetitlebottom "><label class="etitletit"> <b>DNI</b></label> <label id="dni_id" style="font-size: 24px"><?php echo ($this->director) ? $this->director->ins_numdoc : ''; ?></label></div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12"> 
+                                    <div class="form-group  espacerightleft espace-top">                      
+
+                                        <label id="dni_id" style="font-size: 32px"><?php echo ($this->director) ? $this->director->apepat . ' ' . $this->director->apemat . ' ' . $this->director->nombres : ''; ?></label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+<?php endif; ?>
+
+<?php if ($this->estado == '7'): //7 ?>
+                        <div class="row alert-success2 alert" >
+                            <div class="col-xs-12 text-center espace-bottom"><b>
+                                    GRAB&Oacute; FICHA DE CONTINGENCIA.</b></div>
+
+                            <div class="col-xs-12"> 
+                                <div class="form-group  espacerightleft espace-top">
+
+                                    <div class="espacetitlebottom"><label class="etitletit"><b>COD FICHA :</b> </label>
+                                        <label id="dni_id" style="font-size: 24px"><?php echo $_REQUEST['ins_numdoc']; ?></label></div>
+
+                                </div>
+                            </div>
+
+                        </div>
+<?php endif; ?>
+
+
+                <?php if ($this->estado == '4'): ?>
+                        <div class="row  alert-danger2 alertrojo" >
+                            <div class="col-xs-12 text-center espace-bottom">
+                                ERROR :  <b> C&Oacute;DIGO DE FICHA NO ENCONTRADO EN EL PADR&Oacute;N </b></div>
+                            <div class="row">
+
+                                <div class="col-xs-12"> 
+                                    <div class="form-group  espacerightleft espace-top">
+
+                                        <div class="espacetitlebottom"><label class="etitletit"><b>COD FICHA :</b> </label> <label id="dni_id" style="font-size: 24px"><?php echo $_REQUEST['ins_numdoc'] ?></label></div>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+<?php endif; ?>
+
+<?php if ($this->estado == '2'): //2 ?>
+                        <div class="row  alert-danger2 alert" >
+                            <div class="col-xs-12 text-center espace-bottom"> ERROR : 
+                                <b> La ficha no pertenece al aula.</b> </div> 
+                            <?php if($this->director->ins_numdoc): ?>
+                            <div class="row">
+                                <table class="table">
+                                    <tr>
+                                        <td><label class="espacetitlebottom etitletit"><b>DNI :</b></label>
+                                            <label id="dni_id" style="font-size: 24px"><?php echo ($this->director) ? $this->director->ins_numdoc : ''; ?></label>
+                                        </td>
+                                        <td rowspan="2" class="text-center">
+                                            <div class="aulasnro">
+                                                <b>AULA</b>
+                                                <br>
+                                                <label id="dni_id" style="font-size: 92px;"> <b> <?php echo ($this->director) ? $this->director->aula : ''; ?></b></label>
+
+                                            </div> 
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td  class="nowrap" style="font-size: 32px">
+                                            <label id="dni_id"><?php echo ($this->director) ? $this->director->apepat . ' ' . $this->director->apemat . ' ' . $this->director->nombres : ''; ?></label>
+
+                                        </td>
+
+                                    </tr>
+                                </table>
+
+
+                            </div>
+                            <?php endif; ?>
+                        </div>
+<?php endif; ?>
+
+<?php if ($this->estado == '5'): //5 ?>
+                        <div class="row  alert-danger2 alert" >
+                            <div class="col-xs-12 text-center espace-bottom"> 
+                                ERROR : <b> No se encuentra registrada su asistencia. </b></div>
+                            <div class="row">
+                                <table class="table">
+                                    <tr>
+                                        <td><label class="espacetitlebottom etitletit"><b>DNI :</b></label>
+                                            <label id="dni_id" style="font-size: 24px"><?php echo ($this->director) ? $this->director->ins_numdoc : ''; ?></label>
+                                        </td>
+                                        <td rowspan="2" class="text-center">
+                                            <div class="aulasnro">
+                                                <b>AULA</b>
+                                                <br>
+                                                <label id="dni_id"  style="font-size: 92px;">
+                                                    <b> <?php echo ($this->director) ? $this->director->aula : ''; ?></label></b>
+
+                                            </div>    
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="nowrap">
+                                            <label id="dni_id" style="font-size: 32px"><?php echo ($this->director) ? $this->director->apepat . ' ' . $this->director->apemat . ' ' . $this->director->nombres : ''; ?></label>
+
+                                        </td>
+                                    </tr>
+                                </table>
+
+
+                            </div>
+                        </div>
+<?php endif; ?>
+
+<?php if ($this->estado == '6'): //6 ?>
+                        <div class="row alert-danger2 alert" >
+                            <div class="col-xs-12 text-center espace-bottom"> 
+                                ERROR : <b> La ficha no pertenece al local.</b> </div>
+                            <div class="row">
+                                <table class="table">
+                                    <tr>
+                                        <td><label class="espacetitlebottom etitletit"><b>DNI :</b></label>
+                                            <label id="dni_id" style="font-size: 24px"><?php echo ($this->director) ? $this->director->ins_numdoc : ''; ?></label>
+                                        </td>
+                                        <td rowspan="2" class="text-center">
+                                            <div class="aulasnro">
+                                                <b>AULA</b>
+                                                <br>
+                                                <label id="dni_id" style="font-size: 92px;"> <b><?php echo ($this->director) ? $this->director->aula : ''; ?></b></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="nowrap"> 
+                                            <label id="dni_id" style="font-size: 32px"><?php echo ($this->director) ? $this->director->apepat . ' ' . $this->director->apemat . ' ' . $this->director->nombres : ''; ?></label>      
+                                        </td>                         
+                                    </tr>
+                                </table>
+
+
+                            </div>    
+                        </div>
+<?php endif; ?>
+
+<?php if ($this->estado == '3'): //3 ?>
+                        <div class="row alert-danger2 alert" >
+                            <div class="col-xs-12 text-center espace-bottom"> 
+                                ERROR : <b> Ficha ya registrada.</b> </div>
+                            <div class="row">
+                                <table class="table">
+                                    <tr>
+                                        <td>                                            
+                                            <div class="espacetitlebottom" style="font-size: 24px">
+                                            <?php if ($this->director->ins_numdoc):  ?>
+                                            <label class="etitletit"> <b>DNI : </b>  </label><label id="dni_id"><?php echo ($this->director) ? $this->director->ins_numdoc : ''; ?></label>
+                                            <?php else: ?>
+                                            <label class="etitletit"> <b>N° FICHA : </b>  </label><label id="dni_id"><?php echo  $this->director->codCartilla; ?></label>
+                                            <?php endif; ?>
+                                            </div>
+                                        </td>
+                                        <?php if($this->director->ins_numdoc): ?>
+                                        <td rowspan="2" class="text-center">
+                                            <div class="aulasnro">
+                                                <b>AULA</b>
+                                                <br>
+                                                <label id="dni_id" style="font-size: 92px;">
+                                                    <b> <?php echo ($this->director) ? $this->director->aula : ''; ?></b></label>                 
+                                            </div>
+                                        </td>
+                                        <?php endif; ?>
+                                    </tr>
+                                    <tr>
+                                        <td> 
+                                            <label id="dni_id" style="font-size: 32px"><?php echo ($this->director) ? $this->director->apepat . ' ' . $this->director->apemat . ' ' . $this->director->nombres : ''; ?></label>
+
+                                        </td>                          
+                                    </tr>
+                                </table>   
+
+                            </div>
+                        </div>
+<?php endif; ?>
+
+
+                </div> 
+
+
+            </form>    
+
+
+
+            <input type="hidden" name="nro_local" id="nro_local_id" value="<?php echo ($this->director) ? $this->director->nro_local : ''; ?>"/>
+            <input type="hidden" id="ins_numdoc_id" name="ins_numdoc" value="<?php echo ($this->director) ? $this->director->codFicha : ''; ?>"/>
+            <input type="hidden" id="estado_id" name="estado" value="<?php echo ($this->estado) ? $this->estado : ''; ?>"/>         
+
+
+
+        </div>
+    </div>
+
+</div>

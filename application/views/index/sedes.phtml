@@ -1,0 +1,56 @@
+<div id="container"><!--content del menu -->
+    <div class="container-fluid etitle"> <!-- contenido fluid del boostrat-->
+
+        <div class="panel panel-ecustom ui-shadow">
+            <div class="panel-heading etitleprin">
+                <div class="btn-news"><b> <?php echo $this->titulo; ?> </b></div>
+            </div>
+           
+                <div class="row eborderper ">
+                    <div class="col-xs-10 col-md-12  table-responsive text-center ">
+                         <form role="form" action="<?php echo BASE_URL; ?>index.php/paquete" id="frm1">
+                             <input type="hidden" id="txtSede" name="txtSede" />
+                        <table  class="table table-bordered table-hover table-responsive">
+                            <thead>
+                                <tr class="info">                                    
+                                    <th>COD. SEDE</th>
+                                    <th>SEDE</th>
+                                    <th>ESTADO</th>  
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($this->sedes as $sede): ?>
+                                    <tr>
+                                        <td><small><?php echo $sede->COD_SEDE; ?></small></td>
+                                        <td class="text-left"><small><?php echo $sede->SEDE; ?></small></td>
+                                        <td><?php 
+                                        if($sede->ESTADO == 0 ){
+                                         ?> 
+                                                <button type="button" onclick="inventariar('<?php echo $sede->COD_SEDE; ?>');" class="btn btn-primary"  > INVENTARIAR </button>
+                                             <?php    
+                                        }else{
+                                            ?>
+                                                <button type="button" class="btn btn-success"  > FINALIZADO!!! </button>
+                                                
+                                                    
+                                                
+                                                 
+                                                <?php
+                                        }
+                                        
+                                        ?></td>                                                                                
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                         </form>
+                    <!--</div>-->
+                </div>
+                
+                </div>
+
+        </div>
+    </div>
+</div>
+
+            

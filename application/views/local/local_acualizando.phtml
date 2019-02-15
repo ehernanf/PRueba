@@ -1,0 +1,43 @@
+    <?php
+    //$this->form->ins_numdoc->class = 'form-control text-left input-buscador';
+    //$this->form->ins_numdoc->placeholder = 'Pasar Lector de C&oacute;digo de Barra';
+    ?>
+    <div class="container">
+        <div class="panel panel-ecustom ui-shadow">
+<!--            <div class="panel-heading etitleprin text-left">
+                PRIMER MOMENTO INVENTARIO
+            </div>
+            <BR/>-->
+            <div class="panel-heading etitleprin">
+                <?php echo 'SEDE: ' . ($this->_request->session('sede')) . ' / LOCAL: ' . $this->_request->session('nlocal'); ?>
+            </div>
+            <div class="panel-body etitle">
+                <form class="form-signin " id="frmdirector_id" name="frmdirector_id" >
+                    <div class="row">
+                        <div class="col-xs-12 espace-top espace-bottom buscador">
+
+                            <div class="input-group ">
+                                <input class="form-control text-left input-buscador" placeholder="Pasar Lector de C&oacute;digo de Barra" id="numdoc"/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary  input-buscador " type="button" id="buscar">Buscar</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="muestradiv" class="espacerightleft" style="">                                                                        
+                        <div class="row">
+                            <table  class="table" id="tablavisor">
+                                <thead>
+                                    <th><td>cargando ....</td></th>
+                                </thead>
+                                <tbody>
+                                    
+                                </tbody>                                
+                            </table>
+                        </div>
+                     </div>    
+                    
+                </form>
+            </div>
+        </div>        
+    </div>

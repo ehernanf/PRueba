@@ -1,0 +1,107 @@
+   <div class="container">
+
+        <div class="panel panel-ecustom ui-shadow">
+            <div class="panel-heading etitleprin">REGISTRO DE DATOS</div>
+               <div  class="btn-news">                     
+                   <button type="button" class="emnbtnopt dropdown-toggle btn-new-position "
+                            data-toggle="dropdown">
+                        <a href="javascript:void(0);" onclick="_transfer('2');" ><span class="glyphicon glyphicon-refresh"></span></a>                                                 
+                    </button>
+                </div>
+            <div class="panel-body etitle">
+                <input type="hidden" name="vjson" id ="vjson" value='<?php echo $this->form->getJsonValidate(TRUE); ?>'>
+                <form class="form-signin" role="form" action="<?php echo BASE_URL; ?>index.php/local/registro" method="GET" id="frmdirector_id" name="frmdirector">
+                    
+                    
+                    <div class="row"> 
+                        <div class="form-group  espacerightleft">
+                       
+                        <span class="espacetitlebottom etitletit"><b>Sede</b></span>
+                            <select class="form-control" id="psede" required name="psede" >
+                                <option value="">Seleccione</option>
+                                  <?php foreach ($this->sedes as $sede): ?>
+                                
+                                <option value="<?php echo $sede->cod_sede; ?>"
+                                    <?php if(isset($_GET['psede'])): 
+                                            if($_GET['psede'] == $sede->cod_sede) : 
+                                                echo 'selected' ; 
+                                            endif; 
+                                          endif;?> >  <?php echo $sede->sede;  ?></option>
+                                
+                                <?php endforeach; ?>                                
+                            </select>
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    <div class="espacerightleft" style="background-color: #fffde1;">
+    <table border="0">
+                  <?php // foreach ($this->transporte as $rutas): ?>
+        <?php if(isset($this->mensaje)){ ?>
+        <tr style="background-color: #4fa948;color: #fff;">
+            <td colspan="2"><?php echo $this->mensaje; ?></td>
+        </tr>
+        <?php } ?>
+        <tr>
+            
+            <td style="padding: 5px;"><label class="etitletit">Nombre del Chofer :</label></td>
+            <td style="padding: 5px;"><input type="text" id="chofer" name="chofer" required ></td>
+        </tr>
+        <tr>
+            <td style="padding: 5px;"> <label  class="etitletit" >Placa vehicular  :</label></td>
+            <td style="padding: 5px;"><input type="text" id="placa" name="placa" required ></td>
+        </tr>
+        <tr>
+            <td style="padding: 5px;"><label class="etitletit" >Representante INEI :</label></td>
+            <td style="padding: 5px;"><input type="text" id="representanteINEI" name="representanteINEI" required ></td>
+        </tr>
+        <tr>
+            <td style="padding: 5px;"></td>
+            <td style="padding: 5px;"><button class="btn btn-primary  input-buscador"   type="submit"  >Registrar</button></td>
+        </tr>                    
+                                                <?php // endforeach; ?>
+    </table>                    
+           </div>                    
+                                                              
+     </form>                   
+               
+      <div class="row eborderper">
+                    <div class="col-xs-10 col-md-12 espace-top table-responsive text-center">
+                        <table  class="table table-bordered etableeli text-center table-hover">
+                            <thead><tr class="info">
+                                    <td>COD. SEDE</td>
+                                    <td>SEDE</td>
+                                    <td>CHOFER</td>
+                                    <td>PLACA</td>
+                                    <td>INEI</td>  
+                                    <td>FECHA</td> 
+<!--                                    <td>ESTADO</td>-->
+                                </tr>
+                            </thead>
+                            <tbody id="tb_transporte">
+                                <?php foreach ($this->transporte as $rutas): ?>
+
+                                     <tr id="trans" class="<?php echo ($rutas->estado == '7')?"bg-success":"bg-danger" ?>">
+                                         <td id="cod_sede"><?php echo $rutas->cod_sede; ?></td>                                        
+                                         <td><?php echo $rutas->sede; ?></td>                                        
+                                         <td><?php echo $rutas->chofer; ?></td>                                      
+                                         <td><?php echo $rutas->placa; ?></td> 
+                                           <td><?php echo $rutas->representanteINEI; ?></td>
+                                           <td><?php echo $rutas->fecha; ?></td>
+                                        </tr>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                     
+                    </div>
+                </div>
+                
+
+
+       
+            </div>
+
+        </div>
+    </div>

@@ -1,0 +1,78 @@
+
+<div id="container"><!--content del menu -->
+    <div class="container-fluid etitle"> <!-- contenido fluid del boostrat-->
+
+        <div class="panel panel-ecustom ui-shadow">
+            <div class="panel-heading etitleprin">
+
+                <DIV class="btn-news"><b><?php echo $this->titulo; ?> </b> </DIV>
+                <div  class="btn-news"> 
+                    <button type="button" class="emnbtnopt dropdown-toggle btn-new-position "
+                            data-toggle="dropdown">
+                        <a href="javascript:void(0);" onclick="_transfer('2');"><span class="glyphicon glyphicon-refresh"></span></a>
+                    </button>
+                </div>
+            </div>
+
+            <form role="form" action="" id="frm1">
+                <div class="row eborderper">
+                    <div class="col-xs-10 col-md-12 espace-top table-responsive text-center">                                                  
+                        <table  class="table table-bordered etableeli text-center table-hover">
+                            <thead><tr class="info">
+                                    <td>COD. PAQUETE</td>
+                                    <td>CAJA</td>
+                                    <td>SEDE</td>
+                                    <!--<td>COD. MANUAL</td>-->
+                                    <td>MANUAL</td>                                    
+                                    <td>FECHA Y HORA</td>                                                                        
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($this->directores as $director): ?>
+                                
+                                <?php // var_dump($director); ?>
+                                    <tr  <?php 
+                                    if($director->ESTADO == '7'){                                        
+                                            echo 'class="alert-success"';                                        
+                                    }else{
+                                        echo 'class="alert-danger"';
+                                    }                                  
+                                    ?>   >
+                                       
+                                        <td><small><?php echo $director->COD_PAQUETE; ?></small></td>
+                                        <td><small><?php echo $director->CAJA; ?></small></td>                                       
+                                        <td><small><?php echo $director->SEDE; ?></small></td>                                        
+                                        <!--<td><small><?php // echo $director->COD_MANUAL; ?></small></td>-->                                        
+                                        <td><small><?php echo $director->MANUAL; ?></small></td>                                        
+                                        <td><small><?php echo $director->FECHA; ?></small></td>                                        
+                                   
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-xs-10">
+                                <?php echo $this->paginator; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" data-keyboard="false" data-backdrop="static" id="modalMessage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Sincronizando datos</h4>
+            </div>
+            <div class="modal-body">
+                Espere por favor, este proceso puede tardar entre 15 y 40 segundos.
+            </div>
+        </div>
+    </div>
+</div>

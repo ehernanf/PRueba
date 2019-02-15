@@ -1,0 +1,138 @@
+<?php
+$this->form->ins_numdoc->class = 'form-control text-left input-buscador';
+$this->form->ins_numdoc->placeholder = 'Pasar Lector de Código de Barra';
+$this->form->ins_numdoc->placeholder = 'Pasar Lector de Código de Barra';
+?>
+<div class="container">
+
+    <div class="panel panel-ecustom ui-shadow">
+        <div class="panel-heading etitleprin"><b><?php echo 'SEDE: ' . ($this->_request->session('sede')) . ' / LOCAL: ' . $this->_request->session('nlocal'); ?> </b></div>
+        <div class="panel-body etitle">
+            <input type="hidden" name="vjson" id ="vjson" value='<?php echo $this->form->getJsonValidate(); ?>'>
+
+
+
+            <form class="form-signin" role="form" action="<?php echo BASE_URL; ?>index.php/nacional" method="GET" id="frmnacional_id" name="frmnacional">
+                <div class="row">
+                    <div class="col-xs-12 espace-top espace-bottom buscador">
+
+                        <div class="input-group">
+                            <?php echo form_input($this->form->ins_numdoc); ?>
+
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary  input-buscador " type="submit">Buscar</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="espacerightleft" style="<?php echo ($this->director) ? '' : 'display:none'; ?>">
+
+                    <?php if ($this->estado == '1') : //1?>
+                        <div class="row  alert-success2 alert">
+               <div clas="row">
+                  <table class="table">
+                      <tr>
+                          <td><label class="espacetitlebottom etitletit"><b>C&Oacute;DIGO DE BARRA :</b></label>
+                              <label id="dni_id" style="font-size: 24px"><?php echo ($this->director) ? $this->director->ins_numdoc : ''; ?></label>                                 
+                       
+                          </td>
+                      </tr>
+                      <tr>
+                          <td  class="nowrap" style="font-size: 32px">
+                       <label id="dni_id"><?php echo ($this->director) ? 'ACL : ' .$this->director->apepat. '<br>AULA INICIO : ' .$this->director->apemat.'<br>AULA FIN : '.$this->director->nombres.'<br>CANTIDAD AULAS : '.$this->director->direccion : ''; ?></label>      
+                     </td> 
+                      </tr>
+                      <tr>
+                        <td class="nowrap">
+                          <label class="espacetitlebottom etitletit"><b>Sede : </b></label> 
+                          <label id="dni_id"><?php echo ($this->director) ? $this->director->sede : ''; ?></label>
+                        </td>
+                      </tr>
+                     
+                      <tr>
+                      <td>
+                        <label class="espacetitlebottom etitletit"><b>Local de Ubicaci&oacute;n :</b></label> 
+                     </td>                          
+                      </tr>
+                      <tr>
+                          <td>
+                      <label id="local_id"><?php echo ($this->director) ? $this->director->local_aplicacion : ''; ?></label>         
+                  </td>
+                      </tr>
+                       <tr>
+                          <td>
+                              <label  class="etitletit" id="dni_id"><?php echo ($this->director) ? $this->director->discapacidad : ''; ?></label>    
+                         </td>                         
+                      </tr>
+                      
+                  </table> 
+                   </div>                           
+                         
+                    </div>  
+                    <?php endif; ?>
+                    <?php if ($this->estado == '2') : //2?>
+                        <div class="row alert-warning alert">
+                            <div clas="row">
+                                    <table class="table">
+                      <tr>
+                          <td><label class="espacetitlebottom etitletit"><b>C&Oacute;DIGO DE BARRA :</b></label>
+                               <label id="dni_id" style="font-size: 24px"><?php echo ($this->director) ? $this->director->ins_numdoc : ''; ?></label>
+                            </td>
+                      </tr>
+                      <tr>
+                          <td style="font-size: 32px" class="nowrap"> 
+                               <label id="dni_id"><?php echo ($this->director) ? 'ACL : ' .$this->director->apepat. '<br>AULA INICIO : ' .$this->director->apemat.'<br>AULA FIN : '.$this->director->nombres.'<br>CANTIDAD AULAS : '.$this->director->direccion : ''; ?></label>
+                          </td> 
+                      </tr>
+                      <tr>
+                          <td class="nowrap">
+                               <label class="espacetitlebottom etitletit"><b>Sede : </b></label>  <label id="dni_id"><?php echo ($this->director) ? $this->director->sede : ''; ?></label>
+                          </td>
+                      </tr>
+                      
+                      <tr>
+                      <td>
+                        <label class="espacetitlebottom etitletit"><b>Local de Ubicaci&oacute;n :</b></label> 
+                     </td>                          
+                      </tr>
+                      <tr>
+                          <td>
+                          <label id="local_id"><?php echo ($this->director) ? $this->director->local_aplicacion : ''; ?></label>
+ 
+                          </td>
+                      </tr>
+                       <tr>
+                          <td>
+                              <label id="dni_id" class="etitletit"><?php echo ($this->director) ? $this->director->discapacidad : ''; ?></label>
+                          </td>
+                         
+                      </tr>
+                      
+                  </table>
+
+                            </div>
+                            </div>
+                         
+                    <?php endif; ?>
+                    
+                </div>
+                <?php if ($this->estado == '4'): ?>
+                <div class="espacerightleft">
+                    
+                    <div class="row  alert-danger2 alertrojo text-center">
+                        <label id="searchdni_id" class="">LA CAJA NO ESTA REGISTRADA EN EL PADR&Oacute;N </label>
+                    </div>
+                    </div>
+                <?php endif; ?>
+
+
+            </form>
+
+
+            <input type="hidden" name="nro_local" id="nro_local_id" value="<?php echo ($this->director) ? $this->director->nro_local : ''; ?>"/>
+            <input type="hidden" id="ins_numdoc_id" name="ins_numdoc" value="<?php echo ($this->director) ? $this->director->ins_numdoc : ''; ?>"/>
+            <input type="hidden" id="codigo_id" name="codigo_id" value="<?php echo ($this->director) ? $this->director->codigo : ''; ?>"/>
+            <input type="hidden" id="estado_id" name="estado" value="<?php echo ($this->estado) ? $this->estado : ''; ?>"/>
+        </div>
+
+    </div>

@@ -1,0 +1,72 @@
+<div id="container"><!--content del menu -->
+    <div class="container-fluid etitle"> <!-- contenido fluid del boostrat-->
+        <div class="panel panel-ecustom ui-shadow">
+            <div class="panel-heading etitleprin"><div class="btn-news"><b> <?php echo $this->titulo; ?> </b></div></div>
+            <div class="row eborderper ">
+                <div class="col-xs-10 col-md-12  table-responsive text-center ">
+                    <table  class="table table-bordered etableeli text-center table-striped" id="tprincipal" >
+                        <thead>
+                            <tr class="info"><td>SEDE</td>
+                                <td>TOTAL DE CAJAS</td>
+                                <td>TOTAL DE CAJAS LEIDAS</td>
+                                <td>CAJAS TRANSFERIDAS</td>
+                                <td>CAJAS SIN TRANSFERIR</td>
+                                <!--<td>&nbsp;</td>-->
+                            </tr>
+                        </thead>
+                        <tbody>                            
+                            <?php  $x = 0;?>
+                            <?php foreach ($this->reporte as $reporte): ?>
+                                <tr>
+                                    <td class="text-left"><small><?php echo $reporte->sede; ?></small></td>
+                                    <td><label> <small><?php echo $reporte->total_cajas; ?></small></label></td>
+                                    <td><label> <small><?php echo $reporte->total_leidas; ?></small></label></td>
+                                    <td><label> <small><?php echo $reporte->total_transf; ?></small></label></td>
+                                    <td><label> <small><?php echo $reporte->total_transf_sin; ?></small></label></td>
+<!--                                    <td>
+                                        <?php // if($reporte->cod_sede != '' ){ ?> 
+                                        <label><small><img id="vista_<?php // echo $x;?>" src="<?= BASE_URL; ?>public/img/lupa.png" style="width:25px" class="bg-info" data-toggle="modal" data-target="#myModal" ids="<?php // echo ($reporte->cod_sede === '') ? '' : $reporte->cod_sede;?>"/></small></label>
+                                        <?php // }?> 
+                                    </td>                                    -->
+                                </tr>
+                            <?php //  $x = $x + 1;?>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title"><label id="tipoo2"></label> - Cajas que Faltan Escanear </h4> 
+                    </div>
+                    <div class="modal-body">
+                      <table class="table table-bordered etableeli text-center table-striped" id="nopistola"> 
+                         <thead>
+                              <th class="info">
+                                   <td class="info">Codigo barra</td>
+                                   <td class="info">Local</td>
+                                   <td class="info">Tipo caja</td>                      
+                              </th>            
+                          </thead>
+                          <tbody>
+
+                          </tbody>
+                      </table>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>            
+            
+        </div>
+    </div>
+</div>
